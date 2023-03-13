@@ -1,0 +1,51 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: where-for-dinner-ui
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: where-for-dinner-ui
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    networking.knative.dev/visibility: cluster-local
+    app.kubernetes.io/component: run
+    carto.run/workload-name: where-for-dinner-ui
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "4"
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/target: "200"
+        conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        kubectl.kubernetes.io/last-applied-configuration: |
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-ui","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-ui","namespace":"small"},"spec":{"build":{"env":[{"name":"BP_NODE_RUN_SCRIPTS","value":"build"},{"name":"BP_WEB_SERVER_ROOT","value":"dist"}]},"params":[{"name":"gitops_repository","value":"https://github.com/vipinms2/where-for-dinner-ui-small"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1000m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-mc-longaks88.git"},"subPath":"where-for-dinner-ui"}}}
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: where-for-dinner-ui
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: where-for-dinner-ui
+        networking.knative.dev/visibility: cluster-local
+    spec:
+      containers:
+      - image: taplongevity.azurecr.io/tapalong/where-for-dinner-ui-small@sha256:4473a8ca1b074131b9d881185574a159ad1df81cb4a32963eb5a5e58efb5c48a
+        name: workload
+        resources:
+          limits:
+            cpu: "1"
+            memory: 750M
+          requests:
+            cpu: 100m
+            memory: 500M
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
