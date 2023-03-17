@@ -64,7 +64,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: vipins2.azurecr.io/supply-chain/where-for-dinner-availability-small@sha256:36400ce6bcf99c6133ecc6a02a6ced1063d44940a7b090eda9a6c2c056f9a6c2
+        image: vipins2.azurecr.io/supply-chain/where-for-dinner-availability-small@sha256:055be93c33b5fb5a92fd71aee972dca8e64dccae40b0b58fadc9bfba3c4b3f31
         livenessProbe:
           httpGet:
             path: /livez
