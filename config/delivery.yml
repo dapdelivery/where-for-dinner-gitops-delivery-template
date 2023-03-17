@@ -1,18 +1,19 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: where-for-dinner
+  name: where-for-dinner-search-proc
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
-    app.kubernetes.io/part-of: where-for-dinner-api-gateway
+    app.kubernetes.io/part-of: where-for-dinner-search-proc
     apps.tanzu.vmware.com/auto-configure-actuators: "true"
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
+    networking.knative.dev/visibility: cluster-local
     app.kubernetes.io/component: run
-    carto.run/workload-name: where-for-dinner
+    carto.run/workload-name: where-for-dinner-search-proc
 spec:
   template:
     metadata:
@@ -32,30 +33,35 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-          spring-boot-convention/app-live-view-connector-scg
-          spring-boot-convention/app-live-view-appflavours-scg
+          spring-boot-convention/service-intent-rabbitmq
+          spring-boot-convention/service-intent-kafka
         developer.conventions/target-containers: workload
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-api-gateway","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web"},"name":"where-for-dinner","namespace":"small"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_repository","value":"https://github.com/vipinms2/gitops.git"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1000m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-test-mc-longaks3.git"},"subPath":"where-for-dinner-api-gateway"}}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-search-proc","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-search-proc","namespace":"small"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_repository","value":"https://github.com/vipinms2/gitops.git"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1500m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"rmq-where-for-dinner"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-test-mc-longaks3.git"},"subPath":"where-for-dinner-search-proc"}}}
+        services.conventions.carto.run/kafka: kafka-clients/3.3.2
+        services.conventions.carto.run/rabbitmq: amqp-client/5.16.0
       labels:
         app.kubernetes.io/component: run
-        app.kubernetes.io/part-of: where-for-dinner-api-gateway
+        app.kubernetes.io/part-of: where-for-dinner-search-proc
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
-        carto.run/workload-name: where-for-dinner
+        carto.run/workload-name: where-for-dinner-search-proc
         conventions.carto.run/framework: spring-boot
+        networking.knative.dev/visibility: cluster-local
+        services.conventions.carto.run/kafka: workload
+        services.conventions.carto.run/rabbitmq: workload
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8081"
-        tanzu.app.live.view.application.flavours: spring-boot_spring-cloud-gateway
-        tanzu.app.live.view.application.name: where-for-dinner
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: where-for-dinner-search-proc
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: vipins2.azurecr.io/supply-chain/where-for-dinner-small@sha256:66f10903d5c04e5e67b5b5a086d96c9f77311ea072688710267d8fc61f1dc54d
+        image: vipins2.azurecr.io/supply-chain/where-for-dinner-search-proc-small@sha256:bd1636a0fce4c1d7131a869db4d2f6737f2eeb667e7c1cbb80cd47e9584585bb
         livenessProbe:
           httpGet:
             path: /livez
@@ -72,7 +78,7 @@ spec:
             scheme: HTTP
         resources:
           limits:
-            cpu: "1"
+            cpu: 1500m
             memory: 750M
           requests:
             cpu: 100m
