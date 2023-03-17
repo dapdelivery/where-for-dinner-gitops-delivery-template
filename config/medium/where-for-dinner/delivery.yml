@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/target: "200"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.3
+        boot.spring.io/version: 3.0.4
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
@@ -36,7 +36,7 @@ spec:
           spring-boot-convention/app-live-view-appflavours-scg
         developer.conventions/target-containers: workload
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-api-gateway","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web"},"name":"where-for-dinner","namespace":"my-apps"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_server_address","value":"https://github.com/"},{"name":"gitops_repository_owner","value":"vipinms2"},{"name":"gitops_repository_name","value":"gitops"},{"name":"git-ssh","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1000m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/gitops_app.git"},"subPath":"where-for-dinner-api-gateway"}}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-api-gateway","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web"},"name":"where-for-dinner","namespace":"medium"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_server_address","value":"https://github.com/"},{"name":"gitops_repository_owner","value":"vipinms2"},{"name":"gitops_repository_name","value":"gitops"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"gitops_server_kind","value":"github"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1000m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-test-mc-longaks3.git"},"subPath":"where-for-dinner-api-gateway"}}}
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: where-for-dinner-api-gateway
@@ -55,7 +55,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: vipins2.azurecr.io/supply-chain/where-for-dinner-my-apps@sha256:8346629010d29bf29e4d8792e3f5f2432d15d5399ed4d7ca8058cbb05027a60c
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-medium@sha256:2447b4ebabee1f117d6d48258861c302db95dada95a45bc05fbe2e6d12f721d2
         livenessProbe:
           httpGet:
             path: /livez
