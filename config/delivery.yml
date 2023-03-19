@@ -36,7 +36,7 @@ spec:
         networking.knative.dev/visibility: cluster-local
     spec:
       containers:
-      - image: vipins2.azurecr.io/supply-chain/where-for-dinner-ui-small@sha256:b5fca9b1f12b37a5dc5f05824976ce8887e9bb804ebca5dcd465356bb0f2526c
+      - image: vipins2.azurecr.io/supply-chain/where-for-dinner-ui-small@sha256:15a2732438b84ab6b9cd10e7794cb217bb441ebd65f0894c724133f290bcc2e6
         name: workload
         resources:
           limits:
