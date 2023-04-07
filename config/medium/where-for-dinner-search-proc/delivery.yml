@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "4"
         autoscaling.knative.dev/target: "200"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.4
+        boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
@@ -34,7 +34,7 @@ spec:
           spring-boot-convention/app-live-view-appflavours-boot
         developer.conventions/target-containers: workload
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-search-proc","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-search-proc","namespace":"medium"},"spec":{"build":{"env":[{"name":"BP_MAVEN_BUILD_ARGUMENTS","value":"-P native -Dmaven.test.skip=true --no-transfer-progress package"},{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_server_address","value":"https://github.com/"},{"name":"gitops_repository_owner","value":"vipinms2"},{"name":"gitops_repository_name","value":"gitops"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"gitops_server_kind","value":"github"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1500m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-test-mc-longaks3.git"},"subPath":"where-for-dinner-search-proc"}}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-search-proc","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-search-proc","namespace":"medium"},"spec":{"build":{"env":[{"name":"BP_MAVEN_BUILD_ARGUMENTS","value":"-P native -Dmaven.test.skip=true --no-transfer-progress package"},{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_server_address","value":"https://github.com/"},{"name":"gitops_repository_owner","value":"vipinms2"},{"name":"gitops_repository_name","value":"gitops"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"gitops_server_kind","value":"github"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1500m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-mc-longevityaks93.git"},"subPath":"where-for-dinner-search-proc"}}}
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: where-for-dinner-search-proc
@@ -54,7 +54,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-proc-medium@sha256:7cb8d571b12ecd84aff45e00b980dc4b591ed64cf34450299bd30d83b5b5004f
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-proc-medium@sha256:d55264efbf685d7ae93f968ffa3d6cadea2ddbb89dc2d2676aa0c22fa8db80b1
         livenessProbe:
           httpGet:
             path: /livez
