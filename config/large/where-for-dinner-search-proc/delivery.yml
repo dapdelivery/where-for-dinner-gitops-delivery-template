@@ -56,7 +56,7 @@ spec:
           value: crawler,redis
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-proc-large@sha256:792cb2d815dc7c3f3d4e1a8e4f2ca4e89e7ab974956fa3258ec50c7ef0b29c09
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-proc-large@sha256:81bbdd405d5626138253087e06bf3b78ce4b408e2feb6c3c4299c9229e244a41
         livenessProbe:
           httpGet:
             path: /livez
