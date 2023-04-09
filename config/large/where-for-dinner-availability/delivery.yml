@@ -60,7 +60,7 @@ spec:
           value: postgres
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: taplongevity.azurecr.io/tapalong/where-for-dinner-availability-large@sha256:054d7e038af101eec90aa2db768b668caadf7751cce354dc79c53df3e1bc25a8
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-availability-large@sha256:1f7ecd60d10a3eeb1adfae207d96b4f6b43e1eb60c1bd389ce5a157198d05de1
         livenessProbe:
           httpGet:
             path: /livez
