@@ -16,22 +16,22 @@ waitRules:
 apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
-  name: where-for-dinner-search-rmq
+  name: where-for-dinner-search-proc-rmq
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-search","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-search","namespace":"small"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_repository","value":"https://github.com/vipinms2/gitops.git"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1500m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"rmq-where-for-dinner"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-mc-longevityaks95.git"},"subPath":"where-for-dinner-search"}}}
+      {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"where-for-dinner-search-proc","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web","networking.knative.dev/visibility":"cluster-local"},"name":"where-for-dinner-search-proc","namespace":"small"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"gitops_repository","value":"https://github.com/vipinms2/gitops.git"},{"name":"gitops_ssh_secret","value":"git-ssh"},{"name":"annotations","value":{"autoscaling.knative.dev/maxScale":"4","autoscaling.knative.dev/minScale":"1","autoscaling.knative.dev/target":"200"}}],"resources":{"limits":{"cpu":"1500m","memory":"750M"},"requests":{"cpu":"100m","memory":"500M"}},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"rmq-where-for-dinner"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/vipinms2/where-for-dinner-mc-longevityaks95.git"},"subPath":"where-for-dinner-search-proc"}}}
     autoscaling.knative.dev/maxScale: "4"
     autoscaling.knative.dev/minScale: "1"
     autoscaling.knative.dev/target: "200"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
-    app.kubernetes.io/part-of: where-for-dinner-search
+    app.kubernetes.io/part-of: where-for-dinner-search-proc
     apps.tanzu.vmware.com/auto-configure-actuators: "true"
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     networking.knative.dev/visibility: cluster-local
     app.kubernetes.io/component: run
-    carto.run/workload-name: where-for-dinner-search
+    carto.run/workload-name: where-for-dinner-search-proc
 spec:
   name: rmq
   service:
@@ -41,5 +41,5 @@ spec:
   workload:
     apiVersion: serving.knative.dev/v1
     kind: Service
-    name: where-for-dinner-search
+    name: where-for-dinner-search-proc
 
