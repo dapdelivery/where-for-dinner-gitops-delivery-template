@@ -66,7 +66,7 @@ spec:
           value: mysql
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-medium@sha256:d1134b5a3d93d90465a401c98cfa96a48cf3d95ff896d655f1af593053edd7af
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-search-medium@sha256:472da80986d0306a152395b58608506f6f91621185f3ac34c50d64f7ae5fa9d1
         livenessProbe:
           httpGet:
             path: /livez
