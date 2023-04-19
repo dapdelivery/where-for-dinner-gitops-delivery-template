@@ -36,7 +36,7 @@ spec:
         networking.knative.dev/visibility: cluster-local
     spec:
       containers:
-      - image: taplongevity.azurecr.io/tapalong/where-for-dinner-ui-large@sha256:06615dddbdd2dacc6b7ab58840873af0b6a9ad73726c6be846028571c9f96fb6
+      - image: taplongevity.azurecr.io/tapalong/where-for-dinner-ui-large@sha256:f50f5f268bd4dc6c58e73bfdfa55c9ae72a9af31dec7494b0b16fc8139d2c678
         name: workload
         resources:
           limits:
