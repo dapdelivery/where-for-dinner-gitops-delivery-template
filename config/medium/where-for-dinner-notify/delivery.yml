@@ -54,7 +54,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: taplongevity.azurecr.io/tapalong/where-for-dinner-notify-medium@sha256:f65a7dbb194c86761c3baafe0f7cbe2d9003ebfe4026c63958cf4db6fed85c46
+        image: taplongevity.azurecr.io/tapalong/where-for-dinner-notify-medium@sha256:1d7a7c03303b3f625d094bcf70c51fdddf87ea3c5f4344428237e81f6f6835c2
         livenessProbe:
           httpGet:
             path: /livez
