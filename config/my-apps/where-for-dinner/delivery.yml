@@ -53,7 +53,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: dev.registry.tanzu.vmware.com/tanzu-application-platform/ci-pipeline/apps-26-05-2023-04-54-55-877715673/where-for-dinner-my-apps@sha256:2a9c558d6c80e163b6f3eaf8bfce236262e487bb4be4d41086817d4a7f4a6665
+        image: dev.registry.tanzu.vmware.com/tanzu-application-platform/ci-pipeline/apps-26-05-2023-06-09-33-814305572/where-for-dinner-my-apps@sha256:9b5c31630fe6d1d73e949bfc9fbfa3d26674ffc8c3d3d5bf197a1e62be3acaa1
         livenessProbe:
           httpGet:
             path: /livez
